@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUCTOS</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para productos */
+        .categoria {
+            margin-top: 40px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.123);
+            padding: 20px;
+            margin: 20px;
+        }
+        
+        .categoria h2 {
+            background-color: rgb(199, 194, 197);
+            font-size: 24px;
+            color: #391527;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .productos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .producto {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 2px solid #cf0b94;
+            transition: transform 0.3s ease;
+        }
+        
+        .producto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(207, 11, 148, 0.2);
+        }
+        
+        .producto img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        
+        .producto p {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 16px;
+            color: #000000;
+            margin: 8px 0;
+        }
+        
+        .producto button {
+            margin-top: 10px;
+            background: #cf0b94;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .producto button:hover {
+            background: #a0097a;
+        }
+        
+        #carrito {
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.123);
+            border: 2px solid #cf0b94;
+        }
+        
+        #carrito h2 {
+            background-color: rgb(199, 194, 197);
+            font-size: 24px;
+            color: #391527;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .item-carrito {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 16px;
+        }
+        
+        .item-carrito button {
+            background: #cf0b94;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .item-carrito button:hover {
+            background: #a0097a;
+        }
+        
+        #total {
+            font-weight: bold;
+            color: #cf0b94;
+            font-size: 18px;
+        }
+        
+        @media (max-width: 600px) {
+            .producto {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Flirty Pets</h1>
+    <h2>PROFESIONAL EN PELUQUERIA CANINA Y CUIDADO DE MASCOTAS </h2>
+   
+    <nav>
+        <a href="index.html"> INICIO |</a>
+        <a href="Productos.html"> PRODUCTOS |</a>
+        <a href="contacto.html"> CONTACTANOS | </a>
+        <a href="citas.html"> AGENDA TU CITA  </a>
+    </nav>
+</header>
+
+<!-- Secciones de Categorías -->
+<div id="contenedor-productos"></div>
+
+<!-- Carrito -->
+<div id="carrito">
+    <h2>🛒 Carrito de Compras</h2>
+    <div id="lista-carrito"></div>
+    <p style="text-align: center; font-size: 18px; margin-top: 20px;">
+        <strong>Total:</strong> $<span id="total">0</span>
+    </p>
+</div>
+
+<script>
+  const productos = {
+    "Collares": [
+      { nombre: "Collar con taches azul", precio: 47000, imagen: "collar1.webp" },
+      { nombre: "Collar con bicolor lila", precio: 32000, imagen: "collar2.webp" },
+      { nombre: "Collar gris con dije de huella", precio: 30000, imagen: "collar3.webp" },
+      { nombre: "Collar Ezydog", precio: 42450, imagen: "collar4.webp" },
+      { nombre: "Collar cuero rojo", precio: 50000, imagen: "collar5.webp" },
+      { nombre: "Collar con placa de identificacion", precio: 55900, imagen: "collar6.webp" },
+      { nombre: "Collar para todas las razas", precio: 55000, imagen: "collar7.webp" },
+      { nombre: "Collar Luis Vuitton", precio: 99000, imagen: "collar8.webp" },
+      { nombre: "Collar con pañoleta", precio: 35000, imagen: "collar9.webp" },
+      { nombre: "Collar cadena gigante", precio: 70000, imagen: "collar10.webp" }
+    ],
+    "Ropa Canina": [
+      { nombre: "Impermeable para mascotas", precio: 30000, imagen: "ropa1.webp" },
+      { nombre: "Chaleco para perros medianos", precio: 45900, imagen: "ropa2.webp" },
+      { nombre: "hoddie color negros", precio: 63520, imagen: "ropa3.webp" },
+      { nombre: "camiseta Good Vibes", precio: 52000, imagen: "ropa4.webp" },
+      { nombre: "Sueter rojo", precio: 25000, imagen: "ropa5.webp" },
+      { nombre: "Vestido rosa", precio: 75000, imagen: "ropa6.webp" },
+      { nombre: "conjunto x2", precio: 75000, imagen: "ropa7.webp" },
+      { nombre: "Traje Formal", precio: 80000, imagen: "ropa8.webp" },
+      { nombre: "Ropa Deportiva", precio: 38000, imagen: "ropa9.webp" },
+      { nombre: "Poncho Mexicano", precio: 23000, imagen: "ropa10.webp" }
+    ],
+    
+  };
+
+  const carrito = [];
+  const contenedor = document.getElementById("contenedor-productos");
+  const listaCarrito = document.getElementById("lista-carrito");
+  const totalSpan = document.getElementById("total");
+
+  for (let categoria in productos) {
+    const divCategoria = document.createElement("div");
+    divCategoria.className = "categoria";
+    const titulo = document.createElement("h2");
+    titulo.textContent = categoria;
+    divCategoria.appendChild(titulo);
+
+    const contenedorProductos = document.createElement("div");
+    contenedorProductos.className = "productos";
+
+    productos[categoria].forEach(producto => {
+      const div = document.createElement("div");
+      div.className = "producto";
+      div.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}">
+        <p>${producto.nombre}</p>
+        <p>$${producto.precio}</p>
+        <button onclick='agregarAlCarrito(${JSON.stringify(producto)})'>Agregar</button>
+      `;
+      contenedorProductos.appendChild(div);
+    });
+
+    divCategoria.appendChild(contenedorProductos);
+    contenedor.appendChild(divCategoria);
+  }
+
+  function agregarAlCarrito(producto) {
+    carrito.push(producto);
+    actualizarCarrito();
+  }
+
+  function quitarDelCarrito(index) {
+    carrito.splice(index, 1);
+    actualizarCarrito();
+  }
+
+  function actualizarCarrito() {
+    listaCarrito.innerHTML = "";
+    let total = 0;
+    carrito.forEach((item, index) => {
+      total += item.precio;
+      const div = document.createElement("div");
+      div.className = "item-carrito";
+      div.innerHTML = `
+        <span>${item.nombre} - $${item.precio}</span>
+        <button onclick="quitarDelCarrito(${index})">X</button>
+      `;
+      listaCarrito.appendChild(div);
+    });
+    totalSpan.textContent = total;
+  }
+</script>
+
+    
+
+</body>
+</html>

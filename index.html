@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tips</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos para el slider */
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 400%;
+        }
+
+        .slide {
+            width: 25%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .slide-content h3 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .slide-content p {
+            margin: 0;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .slider-btn {
+            background: rgba(207, 11, 148, 0.8);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: rgba(207, 11, 148, 1);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: #cf0b94;
+        }
+
+        .slider-auto-controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .auto-btn {
+            background: #cf0b94;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .auto-btn:hover {
+            background: #a0097a;
+        }
+
+        .auto-btn.active {
+            background: #721c68;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flirty Pets</h1>
+        <h2>PROFESIONAL EN PELUQUERIA CANINA Y CUIDADO DE MASCOTAS </h2>
+       
+
+        <nav>
+            <a href="index.html"> INICIO |</a>
+            <a href="Productos.html"> PRODUCTOS |</a>
+            <a href="contacto.html"> CONTACTANOS | </a>
+            <a href="citas.html"> AGENDA TU CITA  </a>
+        </nav>
+    </header>
+
+    <!-- Slider Automático y Manual -->
+    <div class="slider-container">
+        <div class="slider" id="slider">
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&h=400&fit=crop" alt="Peluquería Canina">
+                <div class="slide-content">
+                    <h3>Peluquería Profesional</h3>
+                    <p>Servicios de belleza y cuidado para tu mascota</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&h=400&fit=crop" alt="Cuidado de Mascotas">
+                <div class="slide-content">
+                    <h3>Cuidado Integral</h3>
+                    <p>Mantenemos a tu perro feliz y saludable</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&h=400&fit=crop" alt="Spa Canino">
+                <div class="slide-content">
+                    <h3>Spa Canino</h3>
+                    <p>Experiencia de relajación y bienestar</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=800&h=400&fit=crop" alt="Consejos de Cuidado">
+                <div class="slide-content">
+                    <h3>Tips y Consejos</h3>
+                    <p>Aprende a cuidar mejor a tu mejor amigo</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slider-controls">
+            <button class="slider-btn" onclick="prevSlide()">‹</button>
+            <button class="slider-btn" onclick="nextSlide()">›</button>
+        </div>
+        
+        <div class="slider-dots" id="dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+            <span class="dot" onclick="goToSlide(3)"></span>
+        </div>
+    </div>
+
+    <div class="slider-auto-controls">
+        <button class="auto-btn active" onclick="startAutoSlide()">Iniciar Auto</button>
+        <button class="auto-btn" onclick="stopAutoSlide()">Detener Auto</button>
+    </div>
+
+<!--Palabras publicitarias-->
+    <section>
+        <h1> Flirty Pets - Porque tu perro merece lo mejor</h1>
+        <p>En Flirty Pets, no solo nos encargamos de su estilo, ¡nos importa su bienestar! Somos una peluquería canina especializada en amor, cuidado y mucho glamour. Además de embellecer a tu peludo, queremos ayudarte a mantenerlo feliz y saludable. Por eso, te compartimos estos tips infalibles para el cuidado diario de tu mejor amigo.</p>
+    </section>
+
+<!--Tips-->
+    <section>
+        <h1>Tips Para el cuidado de tu Macota</h1>
+        <ol>
+            <li>
+                <h2>Alimentación Premium: Belleza que empieza desde adentro</h2>
+                <p>Una dieta balanceada no solo mejora su salud, también se refleja en un pelaje brillante y fuerte. Consulta con tu veterinario y elige croquetas o alimentos naturales adecuados para su raza, edad y nivel de actividad.</p>  
+            </li>
+            <li>
+                <h2>Higiene regular = Pelaje sano y libre de nudos</h2>
+                <p>¿Sabías que un mal cepillado puede generar nudos dolorosos en su piel? En Flirty Pets, usamos productos profesionales y técnicas adecuadas para cada tipo de pelaje. ¡Ven y déjanos consentirlo como se merece!
+              💡 Consejo: Cepíllalo en casa al menos 2 veces por semana y agenda su baño profesional cada 15 a 30 días, según su tipo de pelo.</p>
+            </li>
+            <li>
+                <h2>Visitas al veterinario: Una rutina que salva vidas</h2>
+                <p>Mantén al día sus vacunas, desparasitaciones y chequeos anuales. El cuidado estético es importante, pero la salud siempre es lo primero. Si notas cambios en su comportamiento, apetito o energía, ¡no lo dejes pasar!</p>
+            </li>
+            <li>
+                <h2>Corte de pelo según la temporada</h2>
+                <p>En Flirty Pets, adaptamos el corte de tu perro según el clima. En verano lo ayudamos a mantenerse fresco, y en invierno cuidamos que conserve su abrigo natural. Pregunta por nuestros servicios de corte estético y funcional para cada raza.</p>
+            </li>
+            <li>
+                <h2>Actividad física + Estimulación mental = Perro feliz y equilibrado</h2>
+                <p>Paseos, juegos y entrenamiento son clave para evitar el aburrimiento y la ansiedad. Un perro activo es un perro sano. ¡Y después de jugar, qué mejor que una sesión de spa en Flirty Pets!</p>
+            </li>
+            <li>
+                <h2>Mimos, caricias y tiempo de calidad</h2>
+                <p>Nada reemplaza tu amor. Habla con él, abrázalo, dedica momentos solo para ustedes. Tu perro no necesita lujos, solo tu atención... aunque un buen corte de pelo nunca está de más.</p>
+            </li>
+        </ol>
+    </section>
+    <section>
+        <h1> ¡Mas informacion!</h1>
+        <table>
+        <tr>
+            <td>
+    <fieldset>
+       
+      <form>
+        <Strong>Los campos marcados con * son de inserción obligatoria</Strong>
+        <br>
+        <br>
+        <table>
+
+        
+        
+            <td>
+            <tr>
+                <td>*Nombre: </td>
+                <td><input type="text" required></td>
+         
+            </tr>
+            <tr>
+                <td>*Celular: </td>
+                <td><input type="text" required></td>
+         
+            </tr>
+            <td>*Dudas:</td>
+            <td><textarea name="Escrube un texto" id=""> Escriba un texto</textarea></td>
+           </tr>
+  
+    </tr>
+    </table>
+         <br>
+         <strong>Los datos Personales facilitados son susceptibles de cesion cuando esta precisa para tramitar su contestacion.</strong>
+         <br>
+         <br>
+         <button> Enviar</button>
+         <button> Cancelar</button>
+      </form>
+     </fieldset>
+    </td>
+    <td><img src="Gif Feliz.png" alt="HorariodeAtencion" width="450" height="500"></td>
+</table>
+    </section>
+
+    <script>
+        // Variables del slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const slider = document.getElementById('slider');
+        let autoSlideInterval;
+        const slideInterval = 3000; // 3 segundos entre slides
+
+        // Función para mostrar un slide específico
+        function showSlide(n) {
+            currentSlide = n;
+            slider.style.transform = `translateX(-${currentSlide * 25}%)`;
+            
+            // Actualizar dots activos
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Función para ir al slide anterior
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Función para ir al siguiente slide
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Función para ir a un slide específico
+        function goToSlide(n) {
+            showSlide(n);
+        }
+
+        // Función para iniciar el auto-slide
+        function startAutoSlide() {
+            if (autoSlideInterval) return; // Ya está corriendo
+            
+            autoSlideInterval = setInterval(nextSlide, slideInterval);
+            
+            // Actualizar botones
+            document.querySelector('.auto-btn.active').classList.remove('active');
+            event.target.classList.add('active');
+        }
+
+        // Función para detener el auto-slide
+        function stopAutoSlide() {
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = null;
+            }
+            
+            // Actualizar botones
+            document.querySelector('.auto-btn.active').classList.remove('active');
+            event.target.classList.add('active');
+        }
+
+        // Iniciar auto-slide al cargar la página
+        window.addEventListener('load', function() {
+            startAutoSlide();
+        });
+
+        // Pausar auto-slide cuando el usuario interactúa manualmente
+        document.querySelectorAll('.slider-btn, .dot').forEach(element => {
+            element.addEventListener('click', function() {
+                stopAutoSlide();
+            });
+        });
+
+        // Reiniciar auto-slide después de 5 segundos de inactividad
+        let inactivityTimer;
+        function resetAutoSlide() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                if (!autoSlideInterval) {
+                    startAutoSlide();
+                }
+            }, 5000);
+        }
+
+        // Detectar inactividad del usuario
+        document.addEventListener('mousemove', resetAutoSlide);
+        document.addEventListener('keypress', resetAutoSlide);
+    </script>
+</body>
+</html>
